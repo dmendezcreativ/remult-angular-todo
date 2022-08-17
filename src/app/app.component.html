@@ -1,5 +1,6 @@
 <input type="checkbox" [(ngModel)]="hideCompleted" (change)="fetchTasks()">
 Hide completed
+<button (click)="addTask()">Add</button>
 <hr>
 <div *ngFor="let task of tasks">
   <input type="checkbox" [(ngModel)]="task.completed">

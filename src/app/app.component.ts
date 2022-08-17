@@ -25,6 +25,11 @@ export class AppComponent {
   }
 
   async saveTask(task: Task) {
-    await this.taskRepo.save(task);
+    const savedTask = await this.taskRepo.save(task);
+    //this.tasks = this.tasks.map(t => t == task ? savedTask : t);
+  }
+
+  async addTask() {
+    this.tasks.push(new Task());
   }
 }
