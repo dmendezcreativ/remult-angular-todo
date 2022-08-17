@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Remult } from 'remult';
+import { Task } from 'src/shared/Task';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'remult-angular-todo';
+  constructor(public remult: Remult) { }
+  taskRepo = this.remult.repo(Task);
+  hideCompleted = false;
+  tasks: Task[] = [];
+  async fetchTasks() {
+    this.tasks = await this.taskRepo.find({
+      limit: 20,
+      orderBy: { completed: "asc"},
+      where: {completed: this.hideCompleted ? false : undefined}
+    });
+  }
+  ngOnInit() {
+    this.fetchTasks();
+  }
+
+  async saveTask(task: Task) {
+    await this.taskRepo.save(task);
+  }
 }

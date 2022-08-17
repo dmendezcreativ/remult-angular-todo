@@ -11,12 +11,12 @@
   },
   {
     "id": "11f2eb55-518b-487b-9da5-b96aa7b4ebb4",
-    "title": "Task c",
+    "title": "Task c is not b",
     "completed": false
   },
   {
     "id": "23294e25-0f9a-40a8-8c4b-0f86b036824a",
-    "title": "Task d",
+    "title": "Task b is now 12",
     "completed": false
   },
   {
