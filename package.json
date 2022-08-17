@@ -2,7 +2,7 @@
   "name": "remult-angular-todo",
   "version": "0.0.0",
   "scripts": {
-    "dev": "concurrently -k -n \"API,WEB\" -c \"bgBlue.bold,bgGreen.bold\" \"ts-node-dev -P tsconfig.server.json src/server/\" \"ng serve --proxy-config proxy.conf.json --open\"",
+    "dev": "concurrently -k -n \"API,WEB\" -c \"bgYellow.bold,bgGreen.bold\" \"ts-node-dev -P tsconfig.server.json src/server/\" \"ng serve --proxy-config proxy.conf.json --open\"",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
