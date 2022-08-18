@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ErrorInfo, Remult } from 'remult';
 import { Task } from 'src/shared/Task';
+import { TasksController } from 'src/shared/TasksController';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ export class AppComponent {
   hideCompleted = false;
   tasks: (Task & { error?: ErrorInfo<Task> })[] = [];
   async fetchTasks() {
+    if (!this.taskRepo.metadata.apiReadAllowed) return;
     this.tasks = await this.taskRepo.find({
       limit: 20,
       orderBy: { completed: "asc" },
@@ -43,8 +45,7 @@ export class AppComponent {
   }
 
   async setAll(completed: boolean) {
-    for (const task of await this.taskRepo.find())
-      await this.taskRepo.save({ ...task, completed });
+    await TasksController.setAll(completed);
     this.fetchTasks();
   }
 }
