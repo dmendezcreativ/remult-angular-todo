@@ -1,3 +1,5 @@
+<button (click)="setAll(true)">Set all as completed</button>
+<button (click)="setAll(false)">Set all as uncompleted</button>
 <input type="checkbox" [(ngModel)]="hideCompleted" (change)="fetchTasks()">
 Hide completed
 <button (click)="addTask()">Add</button>
@@ -6,5 +8,7 @@ Hide completed
   <input type="checkbox" [(ngModel)]="task.completed">
   {{task.title}}
   <input type="text" [(ngModel)]="task.title">
+  {{task.error?.modelState?.title}}
   <button (click)="saveTask(task)">Save</button>
+  <button (click)="deleteTask(task)">Delete</button>
 </div>

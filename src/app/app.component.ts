@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Remult } from 'remult';
+import { ErrorInfo, Remult } from 'remult';
 import { Task } from 'src/shared/Task';
 
 @Component({
@@ -12,24 +12,39 @@ export class AppComponent {
   constructor(public remult: Remult) { }
   taskRepo = this.remult.repo(Task);
   hideCompleted = false;
-  tasks: Task[] = [];
+  tasks: (Task & { error?: ErrorInfo<Task> })[] = [];
   async fetchTasks() {
     this.tasks = await this.taskRepo.find({
       limit: 20,
-      orderBy: { completed: "asc"},
-      where: {completed: this.hideCompleted ? false : undefined}
+      orderBy: { completed: "asc" },
+      where: { completed: this.hideCompleted ? false : undefined }
     });
   }
   ngOnInit() {
     this.fetchTasks();
   }
 
-  async saveTask(task: Task) {
-    const savedTask = await this.taskRepo.save(task);
-    //this.tasks = this.tasks.map(t => t == task ? savedTask : t);
+  async saveTask(task: Task & { error?: ErrorInfo<Task> }) {
+    try {
+      const savedTask = await this.taskRepo.save(task);
+      this.tasks = this.tasks.map(t => t == task ? savedTask : t);
+    } catch (ex: unknown) {
+      task.error = ex as ErrorInfo<Task>;
+    }
   }
 
   async addTask() {
     this.tasks.push(new Task());
+  }
+
+  async deleteTask(task: Task) {
+    await this.taskRepo.delete(task);
+    this.tasks.remove(task);
+  }
+
+  async setAll(completed: boolean) {
+    for (const task of await this.taskRepo.find())
+      await this.taskRepo.save({ ...task, completed });
+    this.fetchTasks();
   }
 }
