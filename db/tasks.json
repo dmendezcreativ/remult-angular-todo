@@ -12,12 +12,12 @@
   {
     "id": "bd71b567-5dd1-45eb-a92e-1a5d1eb5d156",
     "title": "Task 1",
-    "completed": false
+    "completed": true
   },
   {
     "id": "f24b7cb4-d547-401a-913e-7d9c7c356aef",
     "title": "test",
-    "completed": false
+    "completed": true
   },
   {
     "id": "294d6563-3de0-4e8f-a93a-da59f2303fa4",
