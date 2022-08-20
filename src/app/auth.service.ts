@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Remult } from 'remult';
+import { Roles } from '../shared/roles';
 
 @Injectable({
    providedIn: 'root'
@@ -12,6 +13,8 @@ export class AuthService {
          this.setAuthToken(token);
       }
    }
+
+   isAdmin = () => this.remult.user.roles.indexOf(Roles.admin) > -1;
 
    // Passes the decoded user information to Remult and stores the token in the local sessionStorage.
    setAuthToken(token: string | null) {

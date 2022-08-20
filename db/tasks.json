@@ -15,11 +15,6 @@
     "completed": false
   },
   {
-    "id": "dd25f337-72aa-4867-834e-c8d326316600",
-    "title": "testtesttest",
-    "completed": false
-  },
-  {
     "id": "f24b7cb4-d547-401a-913e-7d9c7c356aef",
     "title": "test",
     "completed": false
@@ -41,6 +36,11 @@
   },
   {
     "id": "565d03a8-9a38-4bab-a4b2-05d4fac3021b",
+    "title": "test",
+    "completed": false
+  },
+  {
+    "id": "dbd65315-67aa-4686-9fde-f33e6a9acc9a",
     "title": "test",
     "completed": false
   }
