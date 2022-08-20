@@ -16,7 +16,12 @@ import { AuthService } from './auth.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    JwtModule
+    // Add the authorization token header to all API requests.
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => AuthService.fromStorage()
+      }
+    })
   ],
   providers: [
     { provide: Remult, useClass: Remult, deps: [HttpClient] }
@@ -25,15 +30,8 @@ import { AuthService } from './auth.service';
 })
 export class AppModule { }
 
-// Add the authorization token header to all API requests.
-JwtModule.forRoot({
-  config:{
-     tokenGetter: () => AuthService.fromStorage()
-  }
-})
-
 declare global {
   interface Array<T> {
-      remove(o: T): Array<T>;
+    remove(o: T): Array<T>;
   }
 }

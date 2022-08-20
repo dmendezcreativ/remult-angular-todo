@@ -1,7 +1,7 @@
 import {Allow, Entity, Fields } from "remult";
 
 @Entity("tasks", {
-    allowApiCrud: true
+    allowApiCrud: Allow.authenticated
 })
 export class Task {
     @Fields.uuid()

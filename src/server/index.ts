@@ -1,6 +1,6 @@
 import express from 'express';
-import { expressjwt } from 'express-jwt';
 import { api } from './api';
+import { expressjwt } from 'express-jwt';
 
 const app = express();
 app.use(expressjwt({
