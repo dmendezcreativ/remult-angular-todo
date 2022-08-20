@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ErrorInfo, Remult } from 'remult';
 import { Task } from 'src/shared/Task';
 import { TasksController } from 'src/shared/TasksController';
+import { AuthController } from '../shared/AuthController';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,23 @@ import { TasksController } from 'src/shared/TasksController';
 })
 export class AppComponent {
   title = 'remult-angular-todo';
-  constructor(public remult: Remult) { }
+  username = '';
+
+  constructor(public remult: Remult, private auth: AuthService) {
+  }
+  async signIn() {
+    try {
+      this.auth.setAuthToken(await AuthController.signIn(this.username));
+      this.fetchTasks();
+    } catch (error: any) {
+      alert(error.message);
+    }
+  }
+
+  signOut() {
+    this.auth.setAuthToken(null);
+    this.tasks = [];
+  }
   taskRepo = this.remult.repo(Task);
   hideCompleted = false;
   tasks: (Task & { error?: ErrorInfo<Task> })[] = [];

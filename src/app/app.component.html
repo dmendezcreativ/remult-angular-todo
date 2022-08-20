@@ -1,14 +1,25 @@
-<button (click)="setAll(true)">Set all as completed</button>
-<button (click)="setAll(false)">Set all as uncompleted</button>
-<input type="checkbox" [(ngModel)]="hideCompleted" (change)="fetchTasks()">
-Hide completed
-<button (click)="addTask()">Add</button>
-<hr>
-<div *ngFor="let task of tasks">
-  <input type="checkbox" [(ngModel)]="task.completed">
-  {{task.title}}
-  <input type="text" [(ngModel)]="task.title">
-  {{task.error?.modelState?.title}}
-  <button (click)="saveTask(task)">Save</button>
-  <button (click)="deleteTask(task)">Delete</button>
-</div>
+<ng-container *ngIf="!remult.authenticated()">
+  <input [(ngModel)]="username">
+  <button (click)="signIn()">Sign in</button>
+</ng-container>
+<ng-container *ngIf="remult.authenticated()">
+  <div>
+     Hi {{remult.user.name}}
+     <button (click)="signOut()">Sign out</button>
+  </div>
+  <input type="checkbox" [(ngModel)]="hideCompleted" (change)="fetchTasks()" />
+  Hide Completed
+  <hr />
+  <div *ngFor="let task of tasks">
+     <input type="checkbox" [(ngModel)]="task.completed">
+     <input [(ngModel)]="task.title">
+     {{task.error?.modelState?.title}}
+     <button (click)="saveTask(task)">Save</button>
+     <button (click)="deleteTask(task)">Delete</button>
+  </div>
+  <button (click)="addTask()">Add Task</button>
+  <div>
+     <button (click)="setAll(true)">Set all as completed</button>
+     <button (click)="setAll(false)">Set all as uncompleted</button>
+  </div>
+</ng-container>

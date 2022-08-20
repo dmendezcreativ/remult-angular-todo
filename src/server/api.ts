@@ -1,10 +1,11 @@
 import { remultExpress } from 'remult/remult-express';
+import { AuthController } from '../shared/AuthController';
 import { Task } from '../shared/Task';
 import { TasksController } from '../shared/TasksController';
 
 export const api = remultExpress({
     entities: [Task],
-    controllers: [TasksController],
+    controllers: [TasksController, AuthController],
     initApi: async remult => {
         const taskRepo = remult.repo(Task);
         if (await taskRepo.count() !== 0)  return;
